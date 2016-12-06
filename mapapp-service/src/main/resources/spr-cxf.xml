@@ -1,0 +1,26 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xsi:schemaLocation="
+    http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+	http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+    <import resource="classpath:META-INF/cxf/cxf.xml" />
+    <import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
+
+    <jaxws:endpoint id="schedulejobService_" implementor="#schedulejobServiceImpl" address="/schedulejobService"/>
+    <jaxws:endpoint id="userService_" implementor="#userServiceImpl" address="/userService"/>
+    <jaxws:endpoint id="wechatUserService_" implementor="#wechatUserServiceImpl" address="/wechatUserService"/>
+
+    <jaxws:endpoint id="pointInfoService_" implementor="#pointInfoServiceImpl" address="/pointInfoService"/>
+    <jaxws:endpoint id="pointService_" implementor="#pointServiceImpl" address="/pointService"/>
+    <jaxws:endpoint id="pointPictureService_" implementor="#pointPictureServiceImpl" address="/pointPictureService"/>
+    <jaxws:endpoint id="pointTxtService_" implementor="#pointTxtServiceImpl" address="/pointTxtService"/>
+    <jaxws:endpoint id="recommendLineService_" implementor="#recommendLineServiceImpl" address="/recommendLineService"/>
+
+    <jaxws:endpoint id="pointLineService_" implementor="#pointLineServiceImpl" address="/pointLineService"/>
+
+    <jaxws:endpoint id="adminUserService_" implementor="#adminUserImpl" address="/adminUserService" />
+
+</beans>

@@ -1,0 +1,88 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xmlns:http="http://cxf.apache.org/transports/http/configuration"
+       xsi:schemaLocation="
+	http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+	http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://cxf.apache.org/transports/http/configuration
+	http://cxf.apache.org/schemas/configuration/http-conf.xsd">
+
+    <import resource="classpath:META-INF/cxf/cxf.xml" />
+    <import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+
+    <!--<http:conduit name="*.http-conduit">-->
+    <!--</http:conduit>-->
+
+    <jaxws:client id="userService" serviceClass="com.huashan.core.webservice.UserService"
+                  address="http://${cxf.sysaddress}/services/userService?wsdl">
+        <jaxws:features>
+            <ref bean="cxfFeature" />
+        </jaxws:features>
+    </jaxws:client>
+
+    <jaxws:client id="wechatUserService" serviceClass="com.huashan.core.webservice.WechatUserService"
+                  address="http://${cxf.sysaddress}/services/wechatUserService?wsdl">
+        <jaxws:features>
+            <ref bean="cxfFeature" />
+        </jaxws:features>
+    </jaxws:client>
+
+    <jaxws:client id="schedulejobService" serviceClass="com.huashan.core.webservice.SchedulejobService"
+                  address="http://${cxf.sysaddress}/services/schedulejobService?wsdl">
+        <jaxws:features>
+            <ref bean="cxfFeature" />
+        </jaxws:features>
+    </jaxws:client>
+
+    <jaxws:client id="pointInfoService" serviceClass="com.huashan.core.webservice.PointInfoService"
+                  address="http://${cxf.sysaddress}/services/pointInfoService?wsdl">
+        <jaxws:features>
+            <ref bean="cxfFeature" />
+        </jaxws:features>
+    </jaxws:client>
+
+    <jaxws:client id="pointService" serviceClass="com.huashan.core.webservice.PointService"
+                  address="http://${cxf.sysaddress}/services/pointService?wsdl">
+        <jaxws:features>
+            <ref bean="cxfFeature" />
+        </jaxws:features>
+    </jaxws:client>
+
+    <jaxws:client id="pointPictureService" serviceClass="com.huashan.core.webservice.PointPictureService"
+                  address="http://${cxf.sysaddress}/services/pointPictureService?wsdl">
+        <jaxws:features>
+            <ref bean="cxfFeature" />
+        </jaxws:features>
+    </jaxws:client>
+
+    <jaxws:client id="pointTxtService" serviceClass="com.huashan.core.webservice.PointTxtService"
+                  address="http://${cxf.sysaddress}/services/pointTxtService?wsdl">
+        <jaxws:features>
+            <ref bean="cxfFeature" />
+        </jaxws:features>
+    </jaxws:client>
+
+    <jaxws:client id="recommendLineService" serviceClass="com.huashan.core.webservice.RecommendLineService"
+                  address="http://${cxf.sysaddress}/services/recommendLineService?wsdl">
+        <jaxws:features>
+            <ref bean="cxfFeature" />
+        </jaxws:features>
+    </jaxws:client>
+
+    <jaxws:client id="pointLineService" serviceClass="com.huashan.core.webservice.PointLineService"
+                  address="http://${cxf.sysaddress}/services/pointLineService?wsdl">
+        <jaxws:features>
+            <ref bean="cxfFeature" />
+        </jaxws:features>
+    </jaxws:client>
+
+    <jaxws:client id="adminUserService" serviceClass="com.huashan.core.webservice.AdminUserService"
+                  address="http://${cxf.sysaddress}/services/adminUserService?wsdl">
+        <jaxws:features>
+            <ref bean="cxfFeature" />
+        </jaxws:features>
+    </jaxws:client>
+
+</beans>
