@@ -2,6 +2,7 @@ package com.huashan.core.beans;
 
 import javax.persistence.*;
 
+import com.huashan.core.annotation.CoocaaCascade;
 import com.huashan.core.base.AbstractItem;
 import com.huashan.core.base.ItemBase;
 
@@ -59,6 +60,7 @@ public class PointInfo extends AbstractItem implements ItemBase {
     @Column(name = "type", length = 11)
     private Integer type;
 
+    @CoocaaCascade(targetColumn = "id", jionColunm = "pointId",daoClassName = "com.huashan.core.app.point.PointDao")
     @Transient
     private Point point;
 

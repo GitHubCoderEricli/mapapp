@@ -8,11 +8,16 @@ import com.huashan.core.base.ServiceSupport;
 import com.huashan.core.beans.*;
 import com.huashan.core.webservice.PointInfoService;
 import com.huashan.utils.CollectionsUtil;
+import com.huashan.utils.Pager;
+import com.huashan.utils.StringUtils;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -62,6 +67,29 @@ public class PointInfoServiceImpl extends ServiceSupport<PointInfo> implements P
 				p.setPoint(pointDao.find(p.getPointId()));
 			}
 		}
+		return list;
+	}
+
+	@Override
+	public List<PointInfo> findCascadeByPager(Pager pager) {
+		List<Criterion> criterionList = new ArrayList<Criterion>();
+		String pointType = (String) pager.getQuery().get("pointType");
+		if (StringUtils.isNotEmpty(pointType)) {
+			criterionList.add(Restrictions.eq("type", Integer.parseInt(pointType)));
+		}
+
+		String name = (String) pager.getQuery().get("name");
+		if (StringUtils.isNotEmpty(name)) {
+			criterionList.add(Restrictions.like("name", "%" + name + "%"));
+		}
+
+		String id = (String) pager.getQuery().get("id");
+		if (StringUtils.isNotEmpty(id)) {
+			criterionList.add(Restrictions.eq("id", Integer.parseInt(id)));
+		}
+
+		List<PointInfo> list = null;
+		list = this.dao.findCascade(pager, criterionList, null, Order.asc("id"));
 		return list;
 	}
 

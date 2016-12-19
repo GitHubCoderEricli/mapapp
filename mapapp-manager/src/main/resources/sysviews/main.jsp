@@ -1,7 +1,7 @@
 <%@page contentType="text/html;charset=UTF-8"%>
 <!DOCTYPE html>
 <head>
-    <meta charset="utf-8">
+    <%--<meta charset="utf-8">--%>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>华山路线景点系统管理后台</title>
@@ -22,7 +22,7 @@
     <!--<script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>-->
     <script src="/html5shiv/respond.min.js"></script>
     <script src="/html5shiv/html5shiv.min.js"></script>
-    <![endif]-->
+    <%--<![endif]-->--%>
 </head>
 
 <body>
@@ -38,7 +38,7 @@
                 <span class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand" href="homepage.html" onclick="writeBody('homePage.html', 'targetContainer')">主页</a>
+            <a class="navbar-brand" href="/layout/main" onclick="writeBody('homePage.html', 'targetContainer')">主页</a>
 
         </div>
 
@@ -52,7 +52,7 @@
                             <a href="sightAdd.html">新增景点</a>
                         </li>
                         <li>
-                            <a href="sightList.html">景点列表</a>
+                            <a href="/pointInfo/list">景点列表</a>
                         </li>
                     </ul>
                 </li>
@@ -76,7 +76,7 @@
                             <a href="routeAdd.html">新增路线</a>
                         </li>
                         <li>
-                            <a href="routeList.html">路线列表</a>
+                            <a href="/pointInfo/list">路线列表</a>
                         </li>
                     </ul>
                 </li>

@@ -31,6 +31,15 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+    <!-- 上传文件 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="utf-8"/>
+        <!-- 最大内存大小 -->
+        <property name="maxInMemorySize" value="10240"/>
+        <!-- 最大文件大小，-1为不限制大小 -->
+        <property name="maxUploadSize" value="${maxUploadSize}"/>
+    </bean>
+
     <!--<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">-->
     <!--<property name="dataSource" ref="dataSource" />-->
     <!--<property name="hibernateProperties">-->

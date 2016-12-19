@@ -4,6 +4,7 @@ import javax.jws.WebService;
 import com.huashan.core.base.Service;
 import com.huashan.core.beans.PointDetailed;
 import com.huashan.core.beans.PointInfo;
+import com.huashan.utils.Pager;
 
 import java.util.List;
 
@@ -30,4 +31,11 @@ public interface PointInfoService extends Service<PointInfo> {
      * @return
      */
     PointDetailed findPointDetailed(Integer id);
+
+    /**
+     * 按查询条件查询相应景点
+     * @param pager
+     * @return
+     */
+    List<PointInfo> findCascadeByPager(Pager pager);
 }

@@ -24,7 +24,7 @@ public class Pager implements java.io.Serializable{
 	protected static final Logger logger = Logger.getLogger(Pager.class);
 
 	private int page = 1;
-	private int pageSize = 10;
+	private int pageSize = 1000;
 	private int totalNum = 0;
 	private int totalPage = 0;
 
