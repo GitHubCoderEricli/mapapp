@@ -75,8 +75,6 @@
         <url-pattern>*.html</url-pattern>
     </servlet-mapping>
 
-
-
     <!-- 页面编码过滤 -->
     <servlet>
         <servlet-name>dispatcherServlet</servlet-name>

@@ -1,5 +1,5 @@
+<%@page contentType="text/html;charset=UTF-8"%>
 <!DOCTYPE html>
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -125,7 +125,7 @@
                 dataType: "json",
                 success: function (result) {
                     if (result.result) {
-                        window.location.href = "/layout/main.htm";
+                        window.location.href = "/layout/main";
                     } else {
                         alertDanger(result.message);
                     }

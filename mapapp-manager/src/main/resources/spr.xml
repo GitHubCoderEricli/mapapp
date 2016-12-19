@@ -18,13 +18,17 @@
     <mvc:annotation-driven />
 
     <mvc:interceptors>
-        <bean class="com.huashan.core.interceptor.UserInterceptorAdaptor"></bean>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/.jsp" />
+            <bean class="com.huashan.core.interceptor.UserInterceptorAdaptor"></bean>
+        </mvc:interceptor>
     </mvc:interceptors>
 
     <!--视图渲染-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value=""/>
-        <property name="suffix" value=""/>
+        <property name="prefix" value="/WEB-INF/classes/"/>
+        <property name="suffix" value=".jsp"/>
     </bean>
 
     <!--<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">-->
