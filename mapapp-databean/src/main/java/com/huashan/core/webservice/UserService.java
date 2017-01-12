@@ -59,6 +59,6 @@ public interface UserService extends Service<User> {
      * @param code
      * @return
      */
-    boolean userPk(int userId, int code);
+    int userPk(int userId, int code);
 
 }

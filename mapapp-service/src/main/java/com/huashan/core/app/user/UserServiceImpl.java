@@ -3,6 +3,7 @@ package com.huashan.core.app.user;
 import com.huashan.core.app.npc.NPCDao;
 import com.huashan.core.app.userAttribute.UserAttributeDao;
 import com.huashan.core.app.userSelectSubject.UserSelectSubjectDao;
+import com.huashan.core.app.userpknotes.UserPKNotesDao;
 import com.huashan.core.base.Dao;
 import com.huashan.core.base.ServiceSupport;
 import com.huashan.core.beans.*;
@@ -51,6 +52,9 @@ public class UserServiceImpl extends ServiceSupport<User> implements UserService
 
 	@Autowired
 	NPCDao npcDao;
+
+	@Autowired
+	UserPKNotesDao userPKNotesDao;
 	
 	public Dao<User> getDao(){
 		return this.dao;
@@ -234,39 +238,65 @@ public class UserServiceImpl extends ServiceSupport<User> implements UserService
 	private static int pkflag = 0;
 
 	@Override
-	public boolean userPk(int userId, int code) {
+	public int userPk(int userId, int code) {
+		List<NPC> npcs = this.npcDao.find(Restrictions.eq("code", code));
+		if (CollectionsUtil.isEmpty(npcs)) {
+			return 0;
+		}
+		List<UserPKNotes> userPKNotes = this.userPKNotesDao.find(new Criterion[]{Restrictions.eq("userId", userId),Restrictions.eq("npcId", npcs.get(0).getId())});
+		//pk次数达到5次不能再pk
+		if (!CollectionsUtil.isEmpty(userPKNotes) && userPKNotes.get(0).getPkTimes() == 5) {
+			return 2;
+		}
+		//用户不能自己挑战自己
+		if (userId == npcs.get(0).getUserId()) {
+			return 3;
+		}
 		synchronized(this) {
 			if (pkflag == 1) {
-				return false;
+				return 0;
 			}
 			pkflag = 1;
 		}
 		try {
 			List<UserAttribute> userAttributesA = this.userAttributeDao.find(Restrictions.eq("userId", userId));
-			List<NPC> npcs = this.npcDao.find(Restrictions.eq("code", code));
 			List<UserAttribute> userAttributesB = this.userAttributeDao.find(Restrictions.eq("userId", npcs.get(0).getUserId()));
-			boolean result = userApkB(userAttributesA.get(0), userAttributesB.get(0), npcs.get(0).getCode());
-			if (result) {
+			int result = userApkB(userAttributesA.get(0), userAttributesB.get(0), npcs.get(0).getCode());
+			//pk更新pk记录
+			if (CollectionsUtil.isEmpty(userPKNotes)) {
+				UserPKNotes userPKNote = new UserPKNotes();
+				userPKNote.setUserId(userId);
+				userPKNote.setNpcId(npcs.get(0).getId());
+				userPKNote.setPkTimes(1);
+				this.userPKNotesDao.saveOrUpdate(userPKNote);
+			} else {
+				UserPKNotes userPKNote = userPKNotes.get(0);
+				userPKNote.setPkTimes(userPKNote.getPkTimes()+1);
+				this.userPKNotesDao.saveOrUpdate(userPKNote);
+			}
+			//pk成功更新峰主
+			if (result == 1) {
 				NPC npc = npcs.get(0);
 				npc.setUserId(userId);
 				this.npcDao.saveOrUpdate(npc);
 			}
+
 			return result;
 		} catch (Exception e) {
-			return false;
+			return 0;
 		} finally {
 			pkflag = 0;
 		}
 	}
 
 	/**
-	 * 计算两个用户pk结果
+	 * 计算两个用户pk结果 1成功  0 失败
 	 * @param attributeA
 	 * @param attributeB
 	 * @param pkSign 算法标记 0
 	 * @return
 	 */
-	boolean userApkB(UserAttribute attributeA, UserAttribute attributeB, int pkSign) {
+	int userApkB(UserAttribute attributeA, UserAttribute attributeB, int pkSign) {
 		int aTotal = attributeA.getLife() + attributeA.getNeiGong() + attributeA.getWaiGong() + attributeA.getPartner();
 		int bTotal = attributeB.getLife() + attributeB.getNeiGong() + attributeB.getWaiGong() + attributeB.getPartner();
 
@@ -295,9 +325,9 @@ public class UserServiceImpl extends ServiceSupport<User> implements UserService
 
 		double random = Math.random();
 		if (probability > random) {
-			return true;
+			return 1;
 		}
-		return false;
+		return 0;
 	}
 
 }

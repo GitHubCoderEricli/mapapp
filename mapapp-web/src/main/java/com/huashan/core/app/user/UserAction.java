@@ -119,10 +119,7 @@ public class UserAction extends BaseAction {
 		}
 		Integer id = Integer.parseInt(userId.toString());
 		Integer co = Integer.parseInt(code.toString());
-		boolean flag = this.service.userPk(id, co);
-		if (flag) {
-			return MapResponse.successResponse(1);
-		}
-		return MapResponse.successResponse(0);
+		int flag = this.service.userPk(id, co);
+		return MapResponse.successResponse(flag);
 	}
 }
