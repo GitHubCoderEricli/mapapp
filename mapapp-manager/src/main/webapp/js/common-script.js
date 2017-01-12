@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    
+
 })
 
 /* 用于给页面绘制顶部信息的方法 */

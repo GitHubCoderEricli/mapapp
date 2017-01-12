@@ -49,7 +49,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">景点管理 <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="sightAdd.html">新增景点</a>
+                            <a href="/pointInfo/add">新增景点</a>
                         </li>
                         <li>
                             <a href="/pointInfo/list">景点列表</a>

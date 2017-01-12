@@ -4,8 +4,11 @@ import com.huashan.core.base.Dao;
 import com.huashan.core.base.ServiceSupport;
 import com.huashan.core.beans.Point;
 import com.huashan.core.webservice.PointService;
+import com.huashan.utils.Pager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;	
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 
@@ -32,5 +35,10 @@ public class PointServiceImpl extends ServiceSupport<Point> implements PointServ
 	
 	public boolean saveOrUpdate(Point t) {
 		return dao.saveOrUpdate(t);
+	}
+
+	@Override
+	public List<Point> findByPager(Pager pager) {
+		return null;
 	}
 }

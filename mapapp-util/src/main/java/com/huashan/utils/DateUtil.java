@@ -290,4 +290,23 @@ public class DateUtil {
         String sd = sdf.format(new Date(Long.parseLong(sDate)));
         return sd;
     }
+
+    /**
+     * tm1>tm2返回ture
+     * @param tm1
+     * @param tm2
+     * @return
+     */
+    public static boolean compareTimestamp(String tm1, String tm2) {
+        if (tm2 == null) {
+            return true;
+        }
+        long t1 = Long.parseLong(tm1);
+        long t2 = Long.parseLong(tm2);
+        if (t1 > t2) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

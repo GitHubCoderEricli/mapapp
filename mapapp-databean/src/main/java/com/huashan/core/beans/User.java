@@ -67,6 +67,9 @@ public class User extends AbstractItem implements ItemBase {
 
 	@Column( name = "scope" ,length = 120 )
 	private String scope;
+
+	@Column(name = "timestamp", length = 32)
+	private String timestamp;
 	
 	public User(Integer id, String openid, String nickname, Integer sex, String province, String city, String county, String headImgUrl, String privilege, String unionid){
 		this.id = id;
@@ -171,5 +174,13 @@ public class User extends AbstractItem implements ItemBase {
 
 	public void setScope(String scope) {
 		this.scope = scope;
+	}
+
+	public String getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(String timestamp) {
+		this.timestamp = timestamp;
 	}
 }

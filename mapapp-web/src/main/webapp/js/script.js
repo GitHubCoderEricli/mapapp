@@ -531,9 +531,18 @@ var mapBasic={
 		tileLayer.getTilesUrl = function(tileCoord, zoom) {
 			var x = tileCoord.x;
 			var y = tileCoord.y;
-			return '../tiles/' + zoom + '/tile' + x + '_' + y + '.png';
+			return 'http://139.129.238.37/mapapp/tiles/' + zoom + '/tile' + x + '_' + y + '.png';
 		}
 		return tileLayer;
+	},
+	"addTileLayer1":function (){   //添加图层
+		var tileLayer1 = new BMap.TileLayer();
+		tileLayer1.getTilesUrl = function(tileCoord, zoom) {
+			var x = tileCoord.x;
+			var y = tileCoord.y;
+			return 'http://139.129.238.37/mapapp/tiles/' + zoom + '/tile' + x + '_' + y + ' (2).png';
+		}
+		return tileLayer1;
 	},
 	"addMarker":function(map){   //添加定位点标注
 		var myIcon = new BMap.Icon("../img/point.jpg", new BMap.Size(30,30),{
@@ -717,7 +726,8 @@ map.addControl(top_right_navigation);
 
 //添加图层
 map.addTileLayer(mapBasic.addTileLayer());
-
+//添加图层
+map.addTileLayer(mapBasic.addTileLayer1());
 //添加点击定位
 // map.addControl(mapPosition.clickMoveToPositon());
 
